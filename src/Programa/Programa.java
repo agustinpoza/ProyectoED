@@ -84,21 +84,10 @@ public class Programa{
 		return cumplio;
 	}
 	
-	/**public Boolean eliminarAlumno(Par<Integer,Integer> e) {
-		boolean cumplio = false;
-		for(Position<Par<Integer, Integer>> p : listaAlumnos.positions()) {
-			if(p.element().equals(e)) {
-				try {
-					listaAlumnos.remove(p);
-					cumplio = true;
-				} catch (InvalidPositionException e1) {}
-				break;
-			}
-		}
-		return cumplio;
-	}*/
-
-	
+	/**
+	 * Consultamos las notas de los alumnos aprobados con nota mayor a 60
+	 * @return una ListaDE con todos los alumnos aprobados
+	 */	
 	public PositionList<Par<Integer, Integer>> getAlumnosAprobados() {
 		PositionList<Par<Integer, Integer>> aprobados = new ListaDE<>();
 	    for (Par<Integer, Integer> alumno : listaAlumnos) {
@@ -108,8 +97,10 @@ public class Programa{
 	    }
 	    return aprobados;
 	}
-	
-	
+	/**
+	 * Consultamos las notas de los alumnos desaprobados con nota menor a 60
+	 * @return una ListaDE con todos los alumnos desaprobados
+	 */
 	public PositionList<Par<Integer, Integer>> getAlumnosDesaprobados() {
 		PositionList<Par<Integer, Integer>> desaprobados = new ListaDE<>();
 	    for (Par<Integer, Integer> alumno : listaAlumnos) {

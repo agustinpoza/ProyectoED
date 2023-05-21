@@ -17,6 +17,9 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 	protected int N; //cantidad de buckets, puede ser cualquier numero primo
 	protected final float FACTOR_CARGA = 0.9F;
 	
+	/**
+	 * inicializamos el diccionarioConHash
+	 */
 	public DiccionarioHash() {
 		N = 13;
 		n = 0;
@@ -26,17 +29,28 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 		}
 	}
 	
-	@Override
+	 /**
+     * Consultamos por la cantidad de elementos
+     * @return cantidad de elementos en la lista
+     */
 	public int size() {
 		return n;
 	}
 
-	@Override
+	/**
+     * Consulta si la lista esta vacia
+     * @return True si la lista esta vacia
+     */
 	public boolean isEmpty() {
 		return n==0;
 	}
 
-	@Override
+	/**
+	 * Busca una entrada con clave igual a una clave dada y la devuelve, si no existe retorna nulo.
+	 * @param key Clave a buscar.
+	 * @return Entrada encontrada.
+	 * @throws InvalidKeyException si la clave pasada por parametro es invalida.
+	 */
 	public Entry<K, V> find(K key) throws InvalidKeyException {
 		checkKey(key);  							 //retorna el valor asociado con la clave k en el mapeo, o null si no hay
 		int hk = hashKey(key);						 //una entrada con clave k en el mapeo
@@ -52,7 +66,12 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 		return toReturn;
 	}
 
-	@Override
+	/**
+	 * Retorna una coleccion iterable que contiene todas las entradas con clave igual a una clave dada.
+	 * @param key Clave de las entradas a buscar.
+	 * @return Coleccion iterable de las entradas encontradas.
+	 * @throws InvalidKeyException si la clave pasada por parametro es invalida.
+	 */
 	public Iterable<Entry<K, V>> findAll(K key) throws InvalidKeyException {
 		checkKey(key);
 		int hk = hashKey(key);
@@ -64,7 +83,12 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 		return e;
 	}
 
-	@Override
+	/**
+	 * Inserta una entrada con una clave y un valor dado en el diccionario y retorna la entrada creada.
+	 * @param key Clave de la entrada a crear.
+	 * @return value Valor de la entrada a crear.
+	 * @throws InvalidKeyException si la clave pasada por parametro es invalida.
+	 */
 	public Entry<K, V> insert(K key, V value) throws InvalidKeyException {
 		checkKey(key);
 		int hk = hashKey(key);
@@ -75,7 +99,12 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 		return e;
 	}
 
-	@Override
+	/**
+	 * Remueve una entrada dada en el diccionario y devuelve la entrada removida.
+	 * @param e Entrada a remover.
+	 * @return Entrada removida.
+	 * @throws InvalidEntryException si la entrada no est� en el diccionario o es inv�lida.
+	 */
 	public Entry<K, V> remove(Entry<K, V> e) throws InvalidEntryException {
 		try {
 			checkEntry(e);
@@ -92,7 +121,10 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 		throw new InvalidEntryException("No se encontro entrada");
 	}
 
-	@Override
+	/**
+	 * Retorna una colecci�n iterable con todas las entradas en el diccionario.
+	 * @return Colecci�n iterable de todas las entradas.
+	 */
 	public Iterable<Entry<K, V>> entries() {
 		PositionList<Entry<K,V>> entries = new ListaDE<Entry<K,V>>();
 		for (PositionList<Entry<K, V>> d : a) {
@@ -102,20 +134,39 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
         }
 		return entries;
 	}
-	
+	/**
+	 * Chequeamos la key
+	 * @param key
+	 * @throws InvalidKeyException si la key es nula
+	 */
 	private void checkKey(K key) throws InvalidKeyException{
 		if(key == null) {
 			throw new InvalidKeyException("clave nula");
 		}
 	}
+	/**
+	 * Controlamos la entrada
+	 * @param e
+	 * @throws InvalidEntryException si la entrada es null
+	 */
 	private void checkEntry(Entry<K,V> e) throws InvalidEntryException{
 		if (e == null) throw new InvalidEntryException("Entrada Nula");
 	}
-
+	/**
+	 * chequeamos la clave 
+	 * @param key
+	 * @return la hash code de la clave
+	 * @throws InvalidKeyException si clave es nula
+	 */
 	private int hashKey(K key) throws InvalidKeyException {
 		checkKey(key);
 		return Math.abs(key.hashCode() % N);
 	}
+	/**
+	 * Retorna el siguiente numero primo pasado por parametro
+	 * @param num numero primo siguiente
+	 * @return un numero primo siguiente que pasan por parametro
+	 */
 	private int nextPrime(int num){
 		int candidato = n + 1; // Empezamos en el siguiente número después de n
 	    while (true) { // Iteramos hasta encontrar el siguiente número primo
@@ -132,7 +183,10 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 	        candidato++; // Si no es primo, probamos con el siguiente número
 	    }
 	}
-	
+	/**
+	 * aumenta el tamaño maximo del diccionario
+	 * @throws InvalidKeyException si pasa una key invalida
+	 */
 	private void reHash() throws InvalidKeyException {
 		Iterable<Entry<K,V>> entries = this.entries();
 		N = nextPrime(N*2);n = 0;
