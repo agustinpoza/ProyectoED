@@ -1,5 +1,7 @@
 package TDAColaCP;
-
+/**
+ * clase comparador para comparar dos objetos
+ */
 public class Comparador<E> implements java.util.Comparator<E> {
 
 	/**

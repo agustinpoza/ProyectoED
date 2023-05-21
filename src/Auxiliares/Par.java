@@ -1,6 +1,8 @@
 package Auxiliares;
 import Excepciones.DatoInvalidoException;
-
+/**
+ * clase par, implementa la interfaz entry
+ */
 public class Par<K, V> implements Entry<K,V>{
 	
 	private V lu;

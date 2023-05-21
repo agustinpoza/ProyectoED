@@ -123,7 +123,7 @@ public class GUI {
 		btnCargar = new JButton("agregar");
 		btnCargar.setName("agregar");
 		btnCargar.setAction(subirAlumno);
-		btnCargar.setBounds(263, 60, 70, 20);
+		btnCargar.setBounds(263, 60, 89, 20);
 		frmMalditoFrame.getContentPane().add(btnCargar);
 		
 		scrollPane = new JScrollPane();
@@ -155,13 +155,13 @@ public class GUI {
 		
 		JButton btnEliminar = new JButton("eliminar");
 		btnEliminar.setAction(eliminarAlumno);
-		btnEliminar.setSize(70, 20);
+		btnEliminar.setSize(89, 20);
 		btnEliminar.setLocation(150, 140);
 		frmMalditoFrame.getContentPane().add(btnEliminar);
 		
 		btnBuscar = new JButton("New button");
 		btnBuscar.setAction(buscarAlumno);
-		btnBuscar.setBounds(150, 103, 70, 20);
+		btnBuscar.setBounds(150, 103, 89, 20);
 		frmMalditoFrame.getContentPane().add(btnBuscar);
 		
 
@@ -171,27 +171,27 @@ public class GUI {
 		frmMalditoFrame.getContentPane().add(lblNewLabel_1);
 		
 		btnAprobados = new JButton("New button");
-		btnAprobados.setBounds(623, 94, 89, 23);
+		btnAprobados.setBounds(602, 94, 110, 23);
 		frmMalditoFrame.getContentPane().add(btnAprobados);
 		btnAprobados.setAction(Aprobados);
 		
 		btnDesaprobados = new JButton("Desaprobados");
-		btnDesaprobados.setBounds(722, 94, 101, 23);
+		btnDesaprobados.setBounds(722, 94, 110, 23);
 		frmMalditoFrame.getContentPane().add(btnDesaprobados);
 		btnDesaprobados.setAction(Desaprobados);
 
 		lblPromedio = new JLabel("");
-		lblPromedio.setBounds(345, 109, 46, 14);
+		lblPromedio.setBounds(423, 103, 46, 14);
 		frmMalditoFrame.getContentPane().add(lblPromedio);
 		
 		btnPromedio = new JButton("Promedio");
 		btnPromedio.setAction(promedio);
-		btnPromedio.setBounds(230, 109, 103, 20);
+		btnPromedio.setBounds(281, 103, 132, 20);
 		frmMalditoFrame.getContentPane().add(btnPromedio);
 
 		btnBuscarNota = new JButton("buscarNota");
 		btnBuscarNota.setAction(buscarNota);
-		btnBuscarNota.setBounds(108, 219, 100, 20);
+		btnBuscarNota.setBounds(108, 219, 117, 20);
 		frmMalditoFrame.getContentPane().add(btnBuscarNota);
 		
 		JLabel lblNota_1 = new JLabel("Nota: ");
@@ -206,16 +206,16 @@ public class GUI {
 		
 		btnNotaMin = new JButton("Nota Minima");
 		btnNotaMin.setAction(notaMinima);
-		btnNotaMin.setBounds(230, 140, 103, 20);
+		btnNotaMin.setBounds(281, 134, 132, 20);
 		frmMalditoFrame.getContentPane().add(btnNotaMin);
 		
 		lblNotaMin = new JLabel("");
-		lblNotaMin.setBounds(345, 140, 46, 14);
+		lblNotaMin.setBounds(423, 140, 46, 14);
 		frmMalditoFrame.getContentPane().add(lblNotaMin);
 		
 		btnNotaMax = new JButton("Nota Maxima");
 		btnNotaMax.setAction(notaMaxima);
-		btnNotaMax.setBounds(230, 170, 145, 20);
+		btnNotaMax.setBounds(281, 164, 188, 20);
 		frmMalditoFrame.getContentPane().add(btnNotaMax);
 		
 		
@@ -285,14 +285,19 @@ public class GUI {
 	@SuppressWarnings("serial")
 	Action buscarAlumno = new AbstractAction("buscar") {
 	    public void actionPerformed(ActionEvent e) {
-	        Integer lu = Integer.parseInt(txtBuscar.getText());
-	        Par<Integer, Integer> alumno = p.getAlumnoLu(lu);
-	        if (alumno == null) {
-	            JOptionPane.showMessageDialog(null, "El alumno no está en el sistema", "ERROR", JOptionPane.ERROR_MESSAGE);
-	        } else {
-	            int nota = alumno.getKey(); 
-	            JOptionPane.showMessageDialog(null, "La nota del alumno es: " + nota, "Congratulation", JOptionPane.INFORMATION_MESSAGE);
-	        }
+	    	try {
+		        Integer lu = Integer.parseInt(txtBuscar.getText());
+		        Par<Integer, Integer> alumno = p.getAlumnoLu(lu);
+		        if (alumno == null) {
+		            JOptionPane.showMessageDialog(null, "El alumno no está en el sistema", "ERROR", JOptionPane.ERROR_MESSAGE);
+		        } else {
+		            int nota = alumno.getKey(); 
+		            JOptionPane.showMessageDialog(null, "La nota del alumno es: " + nota, "Nota", JOptionPane.INFORMATION_MESSAGE);
+		        }
+	    	}
+	    	catch(Exception e2) {
+	    		JOptionPane.showMessageDialog(null, "Ingrese un Lu válido", "ERROR", JOptionPane.ERROR_MESSAGE);
+	    	}
 	    }
 	};
 	
@@ -327,14 +332,22 @@ public class GUI {
 	@SuppressWarnings("serial")
 	Action buscarNota = new AbstractAction("buscar nota") {
 		public void actionPerformed(ActionEvent e) {
-			JTextArea textArea = new JTextArea();
-			textArea.setFont(new Font("Comic Sans", Font.PLAIN, 12));
-			for(Entry<Integer,Integer> i : p.alumnosConNota(Integer.parseInt(textNota1.getText()))){
-				textArea.append(i.getValue() + "\n");
+			try {
+				JTextArea textArea = new JTextArea();
+				textArea.setFont(new Font("Comic Sans", Font.PLAIN, 12));
+				if(Integer.parseInt(textNota1.getText())>=0 && Integer.parseInt(textNota1.getText())<=100){
+					for(Entry<Integer,Integer> i : p.alumnosConNota(Integer.parseInt(textNota1.getText()))){
+						textArea.append(i.getValue() + "\n");
+					}
+					JScrollPane scrollPane = new JScrollPane(textArea);
+		            scrollPane.setPreferredSize(new java.awt.Dimension(50, 300));
+		            JOptionPane.showMessageDialog(null, scrollPane, "Los alumnos con la nota "+textNota1.getText(), 1);
+				}
+				else JOptionPane.showMessageDialog(null, "Datos Ingresados Incorrectos", "ERROR", 0);
 			}
-			JScrollPane scrollPane = new JScrollPane(textArea);
-            scrollPane.setPreferredSize(new java.awt.Dimension(50, 300));
-            JOptionPane.showMessageDialog(null, scrollPane, "Los alumnos con la nota "+textNota1.getText(), 1);
+			catch(Exception e2) {
+				JOptionPane.showMessageDialog(null, "Igrese una nota valida", "ERROR", 0);
+			}
 		}
 	};
 	
@@ -360,7 +373,6 @@ public class GUI {
 			
 		}
 	};
-	
 	
 	
 }

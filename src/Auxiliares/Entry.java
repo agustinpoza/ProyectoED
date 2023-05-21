@@ -1,5 +1,7 @@
 package Auxiliares;
-
+/**
+ * interfaz entry
+ */
 public interface Entry<K,V> {
 	/**
 	 * consulta la clave de la entrada

@@ -3,7 +3,9 @@ package TDADiccionario;
 import Auxiliares.Entry;
 import Excepciones.InvalidEntryException;
 import Excepciones.InvalidKeyException;
-
+/**
+ * Interfaz diccionario
+ */
 public interface Dictionary<K,V>
 {
 	/**

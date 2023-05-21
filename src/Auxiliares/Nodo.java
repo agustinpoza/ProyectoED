@@ -1,5 +1,7 @@
 package Auxiliares;
-
+/**
+ * clase nodo implementa interfaz position
+ */
 public class Nodo<E> implements Position<E> {
 	private E elemento;
 	private Nodo<E> siguiente;

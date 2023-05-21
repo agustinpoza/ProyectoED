@@ -9,7 +9,9 @@ import Excepciones.InvalidPositionException;
 import TDALista.PositionList;
 import TDALista.ListaDE;
 
-
+/**
+ * Estructura Diccionario implementado con tabla hash abierto
+ */
 public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 	
 	PositionList<Entry<K,V>> [] a;

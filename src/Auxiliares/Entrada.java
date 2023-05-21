@@ -1,5 +1,7 @@
 package Auxiliares;
-
+/**
+ * clase entrada implementa la interfaz entry
+ */
 public class Entrada<K,V> implements Entry<K,V> {
 	private K clave;
 	private V valor;

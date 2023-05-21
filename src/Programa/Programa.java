@@ -2,6 +2,7 @@ package Programa;
 import Auxiliares.Entry;
 import Auxiliares.Par;
 import Auxiliares.Position;
+import Auxiliares.Comparador2;
 import Excepciones.EmptyPriorityQueueException;
 import Excepciones.InvalidKeyException;
 import Excepciones.InvalidPositionException;
@@ -12,7 +13,9 @@ import TDADiccionario.Dictionary;
 import TDADiccionario.DiccionarioHash;
 import TDALista.PositionList;
 import TDALista.ListaDE;
-
+/**
+ * implementacion de la logica del programa
+ */
 public class Programa{
 	protected String Materia;
 	protected PositionList<Par<Integer, Integer>> listaAlumnos;
@@ -182,23 +185,6 @@ public class Programa{
 		} catch (EmptyPriorityQueueException e1) {} 
 		
 		return pl;
-	}
-
-	/**
-	 *	clase auxiliar para crear un comparador que usaremos en el metodo NotaMayorMenor
-	 */
-	private class Comparador2<E> implements java.util.Comparator<E> {
-
-		@SuppressWarnings("unchecked")
-		/**
-		 * compara dos objetos 
-		 * @param objeto 1
-		 * @param objeto 2
-		 * @return un entero positivo si el primer argumento es menor al segundo, un entero negativo si es mayor y cero si son iguales
-		 */
-		public int compare(E o1, E o2) {
-			return (((Comparable<E>) o1).compareTo(o2))*-1;
-		}
 	}
 
 }

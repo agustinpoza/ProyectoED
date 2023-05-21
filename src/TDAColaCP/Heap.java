@@ -6,7 +6,9 @@ import Auxiliares.Entrada;
 import Auxiliares.Entry;
 import Excepciones.EmptyPriorityQueueException;
 import Excepciones.InvalidKeyException;
-
+/**
+ * Estructura Cola con priridad implementado con arreglo
+ */
 public class Heap<K,V> implements PriorityQueue<K,V> {
     protected Entrada<K,V> [] elem;
     protected int size;
@@ -16,7 +18,8 @@ public class Heap<K,V> implements PriorityQueue<K,V> {
      * @param cantidad maxima de entradas que puede tener inicialmente 
      * @param comparador que utlizaremos
      */
-    public Heap(int maxElem, Comparator<K> cmp) {
+    @SuppressWarnings("unchecked")
+	public Heap(int maxElem, Comparator<K> cmp) {
         elem = (Entrada<K, V> []) new Entrada[maxElem];
         size = 0;
         this.cmp = cmp;
@@ -142,7 +145,8 @@ public class Heap<K,V> implements PriorityQueue<K,V> {
      * aumenta el tamaño maximo de la cola con prioridad
      */
     private void reSize() {
-        Entrada<K,V> [] arr = (Entrada<K, V> []) new Entrada[elem.length*2];
+        @SuppressWarnings("unchecked")
+		Entrada<K,V> [] arr = (Entrada<K, V> []) new Entrada[elem.length*2];
         int i = 0;
         for(Entrada<K,V> e : elem){
             arr[i++]= e;

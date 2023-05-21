@@ -1,5 +1,7 @@
 package Auxiliares;
-
+/**
+ * interfaz position
+ */
 public interface Position<E> {
 	/**
 	 * consulta el elemento

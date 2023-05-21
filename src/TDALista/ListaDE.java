@@ -2,11 +2,14 @@ package TDALista;
 
 import java.util.Iterator;
 
+import Auxiliares.Nodo;
 import Auxiliares.Position;
 import Excepciones.BoundaryViolationException;
 import Excepciones.EmptyListException;
 import Excepciones.InvalidPositionException;
-
+/**
+ * Estructura Lista Doblemente Enlazada
+ */
 public class ListaDE<E> implements PositionList<E> {
     protected Nodo<E> header;
     protected Nodo<E> trailer;
@@ -17,8 +20,8 @@ public class ListaDE<E> implements PositionList<E> {
     public ListaDE() {
         header = new Nodo<E>();
         trailer = new Nodo<E>();
-        header.setSiguiente(trailer);
-        trailer.setAnterior(trailer);
+        header.setNext(trailer);
+        trailer.setPrev(trailer);
         size = 0;
     }
 
@@ -47,7 +50,7 @@ public class ListaDE<E> implements PositionList<E> {
         if(isEmpty()){
             throw new EmptyListException("Lista vacia.");
         }
-        return header.getSiguiente();
+        return header.getNext();
     }
 
     /**
@@ -59,22 +62,23 @@ public class ListaDE<E> implements PositionList<E> {
         if(isEmpty()){
             throw new EmptyListException("Lista vacia.");
         }
-        return trailer.getAnterior();
+        return trailer.getPrev();
     }
 
     /**
      * 
      * @param p posicion a obtener del siguiente elemento
      * @return la siguiente posicion del parametro p
-     * @throws InvalidPositionException,
+     * @throws InvalidPositionException, si la posicion que le pasamos como parametro no es valida
+     * @throws BoundaryViolationException, si la poscion que le pasamos como parametro es el primer elemento
      * 
      */
     public Position<E> next(Position<E> p) throws InvalidPositionException, BoundaryViolationException {
         Nodo<E> nodo = checkPosition(p);
-        if(nodo.getSiguiente() == trailer){
+        if(nodo.getNext() == trailer){
             throw new BoundaryViolationException("La posicion corresponde al utlimo elemento de la lista.");
         }
-        return nodo.getSiguiente();
+        return nodo.getNext();
     }
 
     /**
@@ -86,10 +90,10 @@ public class ListaDE<E> implements PositionList<E> {
      */
     public Position<E> prev(Position<E> p) throws InvalidPositionException, BoundaryViolationException {
         Nodo<E> nodo = checkPosition(p);
-        if(nodo.getAnterior() == header) {
+        if(nodo.getPrev() == header) {
             throw new BoundaryViolationException("La posicion corresponde al primer elemento de la lista.");
         }
-        return nodo.getAnterior();
+        return nodo.getPrev();
     }
 
     /**
@@ -97,9 +101,9 @@ public class ListaDE<E> implements PositionList<E> {
      * @param element Elemento a insertar al principio de la lista.
      */
     public void addFirst(E element) {
-        Nodo<E> insert = new Nodo<E>(element, header, header.getSiguiente());
-        header.getSiguiente().setAnterior(insert);
-        header.setSiguiente(insert);
+        Nodo<E> insert = new Nodo<E>(element, header, header.getNext());
+        header.getNext().setPrev(insert);
+        header.setNext(insert);
         size++;
     }
 
@@ -113,9 +117,9 @@ public class ListaDE<E> implements PositionList<E> {
             addFirst(element);
         }
         else {
-            insert = new Nodo<E>(element, trailer.getAnterior(), trailer);
-            trailer.getAnterior().setSiguiente(insert);
-            trailer.setAnterior(insert);
+            insert = new Nodo<E>(element, trailer.getPrev(), trailer);
+            trailer.getPrev().setNext(insert);
+            trailer.setPrev(insert);
             size++;
         }
     }
@@ -132,9 +136,9 @@ public class ListaDE<E> implements PositionList<E> {
         if(isEmpty()) {
             throw new InvalidPositionException("Lista vacia.");
         }
-        insert = new Nodo<E>(element, nodo, nodo.getSiguiente());
-        nodo.getSiguiente().setAnterior(insert);
-        nodo.setSiguiente(insert);
+        insert = new Nodo<E>(element, nodo, nodo.getNext());
+        nodo.getNext().setPrev(insert);
+        nodo.setNext(insert);
         size++;
     }
 
@@ -150,9 +154,9 @@ public class ListaDE<E> implements PositionList<E> {
         if(isEmpty()) {
             throw new InvalidPositionException("Lista vacia.");
         }
-        insert = new Nodo<E>(element, nodo.getAnterior(), nodo);
-        nodo.getAnterior().setSiguiente(insert);
-        nodo.setAnterior(insert);
+        insert = new Nodo<E>(element, nodo.getPrev(), nodo);
+        nodo.getPrev().setNext(insert);
+        nodo.setPrev(insert);
         size++;
     }
 
@@ -165,13 +169,13 @@ public class ListaDE<E> implements PositionList<E> {
     public E remove(Position<E> p) throws InvalidPositionException {
         Nodo<E> remove = checkPosition(p);
         E toReturn;
-        remove.getAnterior().setSiguiente(remove.getSiguiente());
-        remove.getSiguiente().setAnterior(remove.getAnterior());
+        remove.getPrev().setNext(remove.getNext());
+        remove.getNext().setPrev(remove.getPrev());
         size--;
         toReturn = remove.element();
-        remove.setElement(null);
-        remove.setAnterior(null);
-        remove.setSiguiente(null);
+        remove.setElem(null);
+        remove.setPrev(null);
+        remove.setNext(null);
         return toReturn;
     }
     /**
@@ -188,7 +192,7 @@ public class ListaDE<E> implements PositionList<E> {
             throw new InvalidPositionException("Lista vacia.");
         }
         toReturn = nodo.element();
-        nodo.setElement(element);
+        nodo.setElem(element);
         return toReturn;
     }
 
@@ -207,10 +211,10 @@ public class ListaDE<E> implements PositionList<E> {
 	 */
     public Iterable<Position<E>> positions() {
         PositionList<Position<E>> toReturn = new ListaDE<Position<E>>();
-        Nodo<E> nodo = header.getSiguiente();
+        Nodo<E> nodo = header.getNext();
         while (nodo != trailer) {
             toReturn.addLast(nodo);
-            nodo = nodo.getSiguiente();
+            nodo = nodo.getNext();
         }
         return toReturn;
     }
@@ -233,7 +237,7 @@ public class ListaDE<E> implements PositionList<E> {
             if( p.element() == null )
                 throw new InvalidPositionException("Posicion eliminada previamente.");
             Nodo<E> n = (Nodo<E>) p;
-            if ((n.getAnterior() == null) || (n.getSiguiente() == null))
+            if ((n.getPrev() == null) || (n.getNext() == null))
                 throw new InvalidPositionException("La posicion no tiene anterior o siguiente");
             return n;
         } catch (ClassCastException e) {
@@ -241,54 +245,5 @@ public class ListaDE<E> implements PositionList<E> {
         }
     }
 
-    /**
-     * Clase Nodo anidada, permite evitar modificar la lista mediante casting
-     * explicito desde la clase cliente.
-     * Cliente no debe conocer como funciona la estructura, solamente debe saber
-     * que hace.
-     * @param <E> generico.
-     */
-    private class Nodo<E> implements Position<E> {
-        private E element;
-        private Nodo<E> siguiente;
-        private Nodo<E> anterior;
-
-        public Nodo(E element, Nodo<E> anterior,Nodo<E> siguiente) {
-            this.element = element;
-            this.anterior = anterior;
-            this.siguiente = siguiente;
-        }
-
-        public Nodo(E element) {
-            this(element, null, null);
-        }
-
-        public Nodo() {
-            this(null, null, null);
-        }
-
-        public E element() {
-            return element;
-        }
-
-        public void setElement(E element) {
-            this.element = element;
-        }
-
-        public Nodo<E> getSiguiente() {
-            return siguiente;
-        }
-
-        public void setSiguiente(Nodo<E> siguiente) {
-            this.siguiente = siguiente;
-        }
-
-        public Nodo<E> getAnterior() {
-            return anterior;
-        }
-
-        public void setAnterior(Nodo<E> anterior) {
-            this.anterior = anterior;
-        }
-    }
+  
 }
