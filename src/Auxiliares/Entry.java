@@ -1,16 +1,16 @@
 package Auxiliares;
 /**
- * interfaz entry
+ * Interfaz entry.
  */
 public interface Entry<K,V> {
 	/**
-	 * consulta la clave de la entrada
-	 * @return clave
+	 * Consulta la clave de la entrada.
+	 * @return Clave
 	 */
 	public K getKey();
 	/**
-	 * consulta el valor de la entrada
-	 * @return valor
+	 * Consulta el valor de la entrada.
+	 * @return Valor
 	 */
 	public V getValue();
 }

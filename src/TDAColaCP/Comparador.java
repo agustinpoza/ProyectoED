@@ -1,16 +1,27 @@
 package TDAColaCP;
+
 /**
- * clase comparador para comparar dos objetos
+ * Clase Comparador que implementa la interfaz java.util.Comparator.
+ *
+ * @param <E> el tipo de elementos a comparar.
  */
 public class Comparador<E> implements java.util.Comparator<E> {
 
-	/**
-	 * compara dos objetos 
-	 * @param objeto 1
-	 * @param objeto 2
-	 * @return un entero positivo si el primer argumento es mayor al segundo, un entero negativo si es menor y cero si son iguales
-	 */
-	public int compare(E o1, E o2) {
-		return ((Comparable<E>) o1).compareTo(o2);
-	}
+    /**
+     * Compara dos objetos y devuelve un valor que indica su orden relativo.
+     *
+     * @param o1 el primer objeto a comparar.
+     * @param o2 el segundo objeto a comparar.
+     * @return un valor negativo si o1 es menor que o2, cero si son iguales, o un valor positivo si o1 es mayor que o2.
+     * @throws ClassCastException si los objetos no son comparables.
+     */
+    public int compare(E o1, E o2) throws ClassCastException {
+        return ((Comparable<E>) o1).compareTo(o2);
+    }
 }
+
+
+
+
+
+

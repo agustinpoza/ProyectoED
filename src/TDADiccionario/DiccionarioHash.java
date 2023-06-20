@@ -10,7 +10,7 @@ import TDALista.PositionList;
 import TDALista.ListaDE;
 
 /**
- * Estructura Diccionario implementado con tabla hash abierto
+ * Clase que modela el comportamiento de un diccionario con hash abierto.
  */
 public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 	
@@ -20,7 +20,7 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 	protected final float FACTOR_CARGA = 0.9F;
 	
 	/**
-	 * inicializamos el diccionarioConHash
+	 * Inicializamos el diccionarioConHash.
 	 */
 	public DiccionarioHash() {
 		N = 13;
@@ -32,7 +32,7 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 	}
 	
 	 /**
-     * Consultamos por la cantidad de elementos
+     * Consulta por la cantidad de elementos.
      * @return cantidad de elementos en la lista
      */
 	public int size() {
@@ -40,7 +40,7 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 	}
 
 	/**
-     * Consulta si la lista esta vacia
+     * Consulta si la lista esta vacia.
      * @return True si la lista esta vacia
      */
 	public boolean isEmpty() {
@@ -137,7 +137,7 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 		return entries;
 	}
 	/**
-	 * Chequeamos la key
+	 * Controla key.
 	 * @param key
 	 * @throws InvalidKeyException si la key es nula
 	 */
@@ -147,7 +147,7 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 		}
 	}
 	/**
-	 * Controlamos la entrada
+	 * Controla la entrada.
 	 * @param e
 	 * @throws InvalidEntryException si la entrada es null
 	 */
@@ -155,9 +155,9 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 		if (e == null) throw new InvalidEntryException("Entrada Nula");
 	}
 	/**
-	 * chequeamos la clave 
+	 * Devuelve la hashKey perteneciente a la key.
 	 * @param key
-	 * @return la hash code de la clave
+	 * @return hash code de la clave
 	 * @throws InvalidKeyException si clave es nula
 	 */
 	private int hashKey(K key) throws InvalidKeyException {
@@ -165,7 +165,7 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 		return Math.abs(key.hashCode() % N);
 	}
 	/**
-	 * Retorna el siguiente numero primo pasado por parametro
+	 * Retorna el siguiente numero primo pasado por parametro.
 	 * @param num numero primo siguiente
 	 * @return un numero primo siguiente que pasan por parametro
 	 */
@@ -186,7 +186,7 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 	    }
 	}
 	/**
-	 * aumenta el tamaño maximo del diccionario
+	 * Aumenta el tamaño maximo del diccionario.
 	 * @throws InvalidKeyException si pasa una key invalida
 	 */
 	private void reHash() throws InvalidKeyException {

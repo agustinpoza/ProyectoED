@@ -1,9 +1,16 @@
 package Excepciones;
+
 /**
- * error la clave es invalida
+ * La clase InvalidKeyException es una excepción que se lanza cuando se intenta utilizar una clave inválida.
  */
-public class InvalidKeyException extends Exception{
-	public InvalidKeyException(String msg) {
-		super(msg);
-	}
+public class InvalidKeyException extends Exception {
+    /**
+     * Construye un nuevo objeto InvalidKeyException con el mensaje de error especificado.
+     *
+     * @param msg El mensaje de error asociado con la excepción.
+     */
+    public InvalidKeyException(String msg) {
+        super(msg);
+    }
 }
+

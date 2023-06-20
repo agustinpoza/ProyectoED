@@ -1,10 +1,10 @@
 package Auxiliares;
 /**
- * interfaz position
+ * Interfaz position.
  */
 public interface Position<E> {
 	/**
-	 * consulta el elemento
+	 * Consulta el elemento
 	 * @return elemento
 	 */
 	public E element();

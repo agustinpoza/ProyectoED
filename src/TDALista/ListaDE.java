@@ -8,7 +8,7 @@ import Excepciones.BoundaryViolationException;
 import Excepciones.EmptyListException;
 import Excepciones.InvalidPositionException;
 /**
- * Estructura Lista Doblemente Enlazada
+ * Clase que modela el comportamiento de una Lista con nodos doblemente enlazados.
  */
 public class ListaDE<E> implements PositionList<E> {
     protected Nodo<E> header;
@@ -66,7 +66,7 @@ public class ListaDE<E> implements PositionList<E> {
     }
 
     /**
-     * 
+     * Devuelve la posicion del elemento siguiente a la posicion pasada por parametro.
      * @param p posicion a obtener del siguiente elemento
      * @return la siguiente posicion del parametro p
      * @throws InvalidPositionException, si la posicion que le pasamos como parametro no es valida
@@ -221,9 +221,9 @@ public class ListaDE<E> implements PositionList<E> {
 
  
     /**
-     * Hace un chequeo de la posicion
+     * Verifica posición
      * @param p la posicion
-     * @return un casteo de tipo nodo
+     * @return Nodo duda
      * @throws InvalidPositionException si la posicion es invalida
      */
     private Nodo<E> checkPosition(Position<E> p) throws InvalidPositionException {
