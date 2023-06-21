@@ -19,7 +19,7 @@ public class Heap<K, V> implements PriorityQueue<K, V> {
     protected Comparator<K> cmp;
 
     /**
-     * Crea un objeto Heap con un tamaño máximo y un comparador dados.
+     * Crea una cola con prioridad con un tamaño máximo y un comparador dados.
      *
      * @param maxElem la cantidad máxima de entradas que puede tener inicialmente.
      * @param cmp     el comparador que se utilizará para determinar la prioridad.
@@ -32,9 +32,9 @@ public class Heap<K, V> implements PriorityQueue<K, V> {
     }
 
     /**
-     * Crea un objeto Heap con un tamaño máximo de 1000 y un comparador dado.
+     * Crea una cola con prioridad con un tamaño máximo de 1000 y un comparador dado.
      *
-     * @param cmp el comparador que se utilizará para determinar la prioridad.
+     * @param comp el comparador que se utilizará para determinar la prioridad.
      */
     public Heap(Comparator<K> cmp) {
         this(1000, cmp);

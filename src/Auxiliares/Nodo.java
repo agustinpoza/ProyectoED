@@ -1,6 +1,6 @@
 package Auxiliares;
 /**
- * La clase Nodo implementa la interfaz Position.
+ * Clase Nodo.
  * Representa un nodo en una estructura de datos enlazada.
  */
 public class Nodo<E> implements Position<E> {

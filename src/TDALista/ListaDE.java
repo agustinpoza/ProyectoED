@@ -15,7 +15,7 @@ public class ListaDE<E> implements PositionList<E> {
     protected Nodo<E> trailer;
     protected int size;
     /**
-     * Inicializamos el constructor
+     * Inicializamos la lista
      */
     public ListaDE() {
         header = new Nodo<E>();

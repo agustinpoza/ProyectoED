@@ -14,7 +14,7 @@ import TDADiccionario.DiccionarioHash;
 import TDALista.PositionList;
 import TDALista.ListaDE;
 /**
- * Esta clase representa la implementación de la lógica del programa.
+ * Clase que representa la implementación de la lógica del programa.
  */
 public class Programa {
     protected String Materia;
@@ -136,8 +136,8 @@ public class Programa {
      */
     public int calcularPromedio() {
         int promedio = 0;
-        for (Position<Par<Integer, Integer>> p : registroAlumnos.positions()) {
-            promedio = promedio + p.element().getKey();
+        for (Par<Integer, Integer> p : registroAlumnos) {
+            promedio = promedio + p.getKey();
         }
         return promedio / registroAlumnos.size();
     }
@@ -151,9 +151,9 @@ public class Programa {
     public Iterable<Entry<Integer, Integer>> alumnosConNota(int nota) {
         Dictionary<Integer, Integer> d = new DiccionarioHash<>();
         Iterable<Entry<Integer, Integer>> e = null;
-        for (Position<Par<Integer, Integer>> p : registroAlumnos.positions()) {
+        for (Par<Integer, Integer> p : registroAlumnos) {
             try {
-                d.insert(p.element().getKey(), p.element().getValue());
+                d.insert(p.getKey(), p.getValue());
             } catch (InvalidKeyException e2) {
             }
         }
@@ -173,9 +173,9 @@ public class Programa {
     public int NotaMinima() {
         PriorityQueue<Integer, Integer> pq = new Heap<>(new Comparador<>());
         int toReturn = 0;
-        for (Position<Par<Integer, Integer>> p : registroAlumnos.positions()) {
+        for (Par<Integer, Integer> p : registroAlumnos) {
             try {
-                pq.insert(p.element().getKey(), p.element().getValue());
+                pq.insert(p.getKey(), p.getValue());
             } catch (InvalidKeyException e) {
             }
         }
@@ -195,9 +195,9 @@ public class Programa {
     public PositionList<Entry<Integer, Integer>> NotaMayorMenor() {
         PriorityQueue<Integer, Integer> pq = new Heap<>(new Comparador2<>());
         PositionList<Entry<Integer, Integer>> pl = new ListaDE<>();
-        for (Position<Par<Integer, Integer>> p : registroAlumnos.positions()) {
+        for (Par<Integer, Integer> p : registroAlumnos) {
             try {
-                pq.insert(p.element().getKey(), p.element().getValue());
+                pq.insert(p.getKey(), p.getValue());
             } catch (InvalidKeyException e2) {
             }
         }

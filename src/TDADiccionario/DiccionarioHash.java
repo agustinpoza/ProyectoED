@@ -20,7 +20,7 @@ public class DiccionarioHash<K,V> implements Dictionary<K,V>{
 	protected final float FACTOR_CARGA = 0.9F;
 	
 	/**
-	 * Inicializamos el diccionarioConHash.
+	 * Inicializamos el diccionario.
 	 */
 	public DiccionarioHash() {
 		N = 13;

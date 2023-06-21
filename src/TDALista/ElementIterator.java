@@ -16,7 +16,7 @@ public class ElementIterator<E> implements Iterator<E> {
 
     /**
      * Crea un iterador de elementos para una PositionList dada.
-     * @param lista la PositionList a iterar.
+     * @param PositionList a iterar.
      */
     public ElementIterator(PositionList<E> lista) {
         list = lista;
